@@ -1,6 +1,9 @@
+import 'package:cat_trivia/data/facts/fact_repository.dart';
+import 'package:cat_trivia/ui/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'feature/presentation/pages/home_page.dart';
+import 'bloc/facts/bloc/fact_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,13 +14,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return BlocProvider<FactBloc>(
+      create: (context) => FactBloc(FactRepository()),
+      child: MaterialApp(
+        //routes: {},
+        debugShowCheckedModeBanner: false,
+        title: 'Cat Trivia',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: HomePage(),
       ),
-      home: HomePage(),
     );
   }
 }

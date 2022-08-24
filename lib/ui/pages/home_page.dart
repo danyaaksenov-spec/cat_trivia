@@ -27,20 +27,7 @@ class _HomePageState extends State<HomePage> {
         if (state is FactLoadingState) {
           const Center(child: CircularProgressIndicator());
         }
-        if (state is FactNoDataState) {
-          return Container(
-            child: Center(
-              child: Text(state.message),
-            ),
-          );
-        }
-        if (state is FactErrorState) {
-          return Container(
-            child: Center(
-              child: Text(state.errorMessage),
-            ),
-          );
-        }
+
         if (state is FactLoadedState) {
           return Scaffold(
             appBar: AppBar(
@@ -134,13 +121,22 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           );
-        } else {
+        }
+        if (state is FactNoDataState) {
           return Container(
             child: Center(
-              child: Text("Error"),
+              child: Text(state.message),
             ),
           );
         }
+        if (state is FactErrorState) {
+          return Container(
+            child: Center(
+              child: Text(state.errorMessage),
+            ),
+          );
+        }
+        return SizedBox.shrink();
       },
     );
   }

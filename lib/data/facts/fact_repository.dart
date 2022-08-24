@@ -6,14 +6,9 @@ import 'package:cat_trivia/data/facts/remote/response/facts.dart';
 
 class FactRepository extends FactDataSource {
   Dio _dio = Dio();
-  FactApiClient _apiClient;
+  late FactApiClient _apiClient;
 
-  var apiKey = "PASTE_YOUR_API_KEY";
-
-  FactRepository(
-    this._apiClient,
-    this.apiKey,
-  ) {
+  FactRepository() {
     _dio = Dio();
     _apiClient = FactApiClient(_dio);
   }
