@@ -9,9 +9,8 @@ class FactModel extends Equatable {
   List<Object?> get props => [];
 
   final String fact;
-  final int length;
 
-  const FactModel({required this.fact, required this.length});
+  const FactModel({required this.fact});
 
   factory FactModel.fromJson(Map<String, dynamic> json) =>
       _$FactModelFromJson(json);
