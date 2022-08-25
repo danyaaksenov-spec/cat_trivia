@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cat_trivia/data/cats/remote/response/cats.dart';
 import 'package:equatable/equatable.dart';
 
@@ -11,8 +11,8 @@ class CatBloc extends Bloc<CatEvent, CatState> {
   final CatRepository repository;
   CatBloc(this.repository) : super(CatInitState()) {
     on<CatLoadEvent>((event, emit) async {
-      emit(CatLoadingState());
       try {
+        emit(CatLoadingState());
         var cat = await repository.getCat();
         if (cat.url.isEmpty) {
           emit(const CatErrorState(messege: "Error"));

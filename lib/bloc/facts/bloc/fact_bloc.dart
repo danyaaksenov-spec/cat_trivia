@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cat_trivia/data/facts/fact_repository.dart';
 import 'package:equatable/equatable.dart';
 
@@ -12,8 +12,8 @@ class FactBloc extends Bloc<FactEvent, FactState> {
 
   FactBloc(this.repository) : super(FactInitState()) {
     on<LoadFactEvent>((event, emit) async {
-      emit(FactLoadingState());
       try {
+        emit(FactLoadingState());
         var fact = await repository.getFact();
         if (fact.fact.isEmpty) {
           emit(const FactNoDataState('Fact not found'));

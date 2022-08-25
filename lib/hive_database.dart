@@ -15,6 +15,10 @@ class HiveDataBase {
     return _box.values.toList().cast<FactHiveModel>().first;
   }
 
+  Future<List<FactHiveModel>> getAllFactsFromLocal() async {
+    return _box.values.toList().cast<FactHiveModel>();
+  }
+
   void addFactsToLocal(FactModel model) async {
     await _box.add(FactHiveModel(fact: model.fact, createdAt: DateTime.now()));
   }

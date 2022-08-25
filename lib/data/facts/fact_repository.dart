@@ -6,7 +6,6 @@ import '../../hive_database.dart';
 import 'local/fact_hive_model.dart';
 
 class FactRepository extends FactDataSource {
-  // FactsLocalStorage local;
   Dio _dio = Dio();
   late FactApiClient _apiClient;
   late HiveDataBase _hiveDataBase;
@@ -22,5 +21,10 @@ class FactRepository extends FactDataSource {
     var resp = await _apiClient.getFact();
     _hiveDataBase.addFactsToLocal(resp);
     return _hiveDataBase.getLastFactsFromLocal();
+  }
+
+  @override
+  Future<List<FactHiveModel>> getAllFactsFromLocal() async {
+    return _hiveDataBase.getAllFactsFromLocal();
   }
 }

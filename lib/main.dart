@@ -1,13 +1,13 @@
+import 'package:cat_trivia/bloc/history/history_bloc.dart';
 import 'package:cat_trivia/data/cats/cat_repository.dart';
 import 'package:cat_trivia/data/facts/fact_repository.dart';
+import 'package:cat_trivia/ui/pages/history_page.dart';
 import 'package:cat_trivia/ui/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
 import 'bloc/cats/bloc/cat_bloc.dart';
 import 'bloc/facts/bloc/fact_bloc.dart';
-import 'common/app_colors.dart';
 import 'data/facts/local/fact_hive_model.dart';
 
 void main() async {
@@ -24,6 +24,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+            create: (context) =>
+                HistoryBloc(FactRepository())..add(LoadHistoryEvent())),
         BlocProvider<FactBloc>(
           create: (context) => FactBloc(FactRepository())
             ..add(
@@ -35,34 +38,17 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-
-          //routes: {},
+          initialRoute: '/mainPage',
+          routes: {
+            '/mainPage': (context) => const HomePage(),
+            '/historyPage': (context) => const HistoryPage(),
+          },
           debugShowCheckedModeBanner: false,
           title: 'Cat Trivia',
           theme: ThemeData(
             primarySwatch: Colors.blue,
-            //visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
-          home: Scaffold(
-            appBar: AppBar(
-              backgroundColor: AppColors.appBar,
-              centerTitle: true,
-              title: Text('Cat Trivia',
-                  style: TextStyle(
-                      color: Colors.black87.withOpacity(0.8), fontSize: 20)),
-              actions: [
-                IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.history_outlined,
-                      color: Colors.black87,
-                      size: 30,
-                      semanticLabel: 'Fact history',
-                    )), //button facts history
-              ],
-            ),
-            body: const HomePage(),
-          )),
+          home: const HomePage()),
     );
   }
 }
