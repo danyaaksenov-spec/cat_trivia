@@ -94,15 +94,15 @@ class _HomePageState extends State<HomePage> {
                           borderRadius: BorderRadius.circular(14),
                           color: Colors.grey,
                           image: DecorationImage(
-                              image: NetworkImage("https://cataas.com" +
-                                  "${state.catModel.url}"),
+                              image: NetworkImage(
+                                  "https://cataas.com ${state.catModel.url}"),
                               fit: BoxFit.cover),
                         ),
                       );
                     }
                     if (state is CatErrorState) {
                       return const Center(
-                        child: Text('Error during getting cat photo'),
+                        child: Text('Error during getting cat\'s photo'),
                       );
                     }
                     return const SizedBox.shrink();
@@ -111,12 +111,7 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        backgroundColor: AppColors.appBar.withOpacity(0.5),
-                        content: const Text(
-                          'Updating cat\'s photo and fact... :)',
-                          style: TextStyle(color: Colors.black87),
-                        )));
+                    //update and save method
                   },
                   child: Container(
                     alignment: Alignment.center,
@@ -153,7 +148,7 @@ class _HomePageState extends State<HomePage> {
           return Center(
             child: Text(
               state.message,
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
           );
         }
@@ -161,7 +156,7 @@ class _HomePageState extends State<HomePage> {
           return Center(
             child: Text(
               state.errorMessage,
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
           );
         }

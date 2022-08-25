@@ -13,6 +13,7 @@ class FactLoadingState extends FactState {}
 
 class FactLoadedState extends FactState {
   FactModel model;
+
   FactLoadedState({
     required this.model,
   });
