@@ -4,18 +4,18 @@ import 'package:hive/hive.dart';
 import 'data/facts/local/fact_hive_model.dart';
 
 class HiveDataBase {
+  late Box _box;
   String boxName = 'facts';
 
-  Future<Box> openBox() async {
-    Box box = await Hive.openBox<FactHiveModel>(boxName);
-    return box;
+  HiveDataBase() {
+    Hive.openBox<FactHiveModel>(boxName).then((value) => _box = value);
   }
 
-  List<FactHiveModel> getFactsFromLocal(Box box) {
-    return box.values.toList().cast<FactHiveModel>();
+  Future<FactHiveModel> getLastFactsFromLocal() async {
+    return _box.values.toList().cast<FactHiveModel>().first;
   }
 
-  Future<void> addFactsToLocal(Box box, FactHiveModel model) async {
-    await box.add(FactHiveModel(fact: model.fact, createdAt: model.createdAt));
+  void addFactsToLocal(FactModel model) async {
+    await _box.add(FactHiveModel(fact: model.fact, createdAt: DateTime.now()));
   }
 }

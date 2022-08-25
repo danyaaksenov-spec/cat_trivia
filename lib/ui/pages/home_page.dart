@@ -3,6 +3,7 @@ import 'package:cat_trivia/common/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+
 import '../../bloc/cats/bloc/cat_bloc.dart';
 import '../widgets/facts_card.dart';
 
@@ -14,9 +15,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final now = DateTime.now();
   @override
   Widget build(BuildContext context) {
+    final FactBloc factBloc = BlocProvider.of<FactBloc>(context);
+    final CatBloc catBloc = BlocProvider.of<CatBloc>(context);
+
     return BlocBuilder<FactBloc, FactState>(
       builder: (context, state) {
         if (state is FactLoadingState) {
@@ -72,7 +75,9 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               ...factsCard(
                                 "Created at:",
-                                DateFormat.Hm().add_MMMMd().format(now),
+                                DateFormat.Hm()
+                                    .add_MMMMd()
+                                    .format(state.model.createdAt),
                               ),
                             ],
                           ),
@@ -94,8 +99,7 @@ class _HomePageState extends State<HomePage> {
                           borderRadius: BorderRadius.circular(14),
                           color: Colors.grey,
                           image: DecorationImage(
-                              image: NetworkImage(
-                                  "https://cataas.com ${state.catModel.url}"),
+                              image: NetworkImage(state.catModel.getFullUrl()),
                               fit: BoxFit.cover),
                         ),
                       );
@@ -111,7 +115,14 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {
-                    //update and save method
+                    factBloc.add(LoadFactEvent());
+                    catBloc.add(CatLoadEvent());
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        backgroundColor: AppColors.appBar.withOpacity(0.5),
+                        content: const Text(
+                          'Updating cat\'s photo and fact... :)',
+                          style: TextStyle(color: Colors.black87),
+                        )));
                   },
                   child: Container(
                     alignment: Alignment.center,

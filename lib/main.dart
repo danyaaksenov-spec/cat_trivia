@@ -4,14 +4,15 @@ import 'package:cat_trivia/ui/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:path_provider/path_provider.dart';
 
 import 'bloc/cats/bloc/cat_bloc.dart';
 import 'bloc/facts/bloc/fact_bloc.dart';
 import 'common/app_colors.dart';
+import 'data/facts/local/fact_hive_model.dart';
 
 void main() async {
   await Hive.initFlutter();
+  Hive.registerAdapter(FactHiveModelAdapter());
 
   runApp(const MyApp());
 }
@@ -60,7 +61,7 @@ class MyApp extends StatelessWidget {
                     )), //button facts history
               ],
             ),
-            body: HomePage(),
+            body: const HomePage(),
           )),
     );
   }

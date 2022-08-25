@@ -1,22 +1,26 @@
-import 'package:cat_trivia/data/facts/local/facts_local_storage.dart';
-import 'package:dio/dio.dart';
-
 import 'package:cat_trivia/data/facts/fact_data_source.dart';
 import 'package:cat_trivia/data/facts/remote/fact_api_client.dart';
-import 'package:cat_trivia/data/facts/remote/response/facts.dart';
+import 'package:dio/dio.dart';
+
+import '../../hive_database.dart';
+import 'local/fact_hive_model.dart';
 
 class FactRepository extends FactDataSource {
   // FactsLocalStorage local;
   Dio _dio = Dio();
   late FactApiClient _apiClient;
+  late HiveDataBase _hiveDataBase;
 
   FactRepository() {
     _dio = Dio();
     _apiClient = FactApiClient(_dio);
+    _hiveDataBase = HiveDataBase();
   }
 
   @override
-  Future<FactModel> getFact() {
-    return _apiClient.getFact();
+  Future<FactHiveModel> getFact() async {
+    var resp = await _apiClient.getFact();
+    _hiveDataBase.addFactsToLocal(resp);
+    return _hiveDataBase.getLastFactsFromLocal();
   }
 }

@@ -1,5 +1,5 @@
-import 'package:cat_trivia/data/facts/remote/response/facts.dart';
+import 'local/fact_hive_model.dart';
 
 abstract class FactDataSource {
-  Future<FactModel> getFact();
+  Future<FactHiveModel> getFact();
 }

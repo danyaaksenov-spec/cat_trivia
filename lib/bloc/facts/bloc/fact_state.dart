@@ -12,9 +12,8 @@ class FactInitState extends FactState {}
 class FactLoadingState extends FactState {}
 
 class FactLoadedState extends FactState {
-  FactModel model;
-
-  FactLoadedState({
+  final FactHiveModel model;
+  const FactLoadedState({
     required this.model,
   });
 
@@ -25,8 +24,9 @@ class FactLoadedState extends FactState {
 class FactNoDataState extends FactState {
   final String message;
 
-  FactNoDataState(this.message);
+  const FactNoDataState(this.message);
 
+  @override
   List<Object> get props => [message];
 
   @override
@@ -35,7 +35,7 @@ class FactNoDataState extends FactState {
 
 class FactErrorState extends FactState {
   final String errorMessage;
-  FactErrorState({
+  const FactErrorState({
     required this.errorMessage,
   });
 

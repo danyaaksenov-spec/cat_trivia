@@ -20,7 +20,7 @@ class CatBloc extends Bloc<CatEvent, CatState> {
           emit(CatLoadedState(catModel: cat));
         }
       } catch (_) {
-        emit(CatErrorState(messege: 'Something went wrong'));
+        emit(const CatErrorState(messege: 'Something went wrong'));
       }
     });
   }
