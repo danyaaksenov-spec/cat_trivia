@@ -11,15 +11,16 @@ class FactBloc extends Bloc<FactEvent, FactState> {
   FactBloc(this.repository) : super(FactInitState()) {
     on<LoadFactEvent>((event, emit) async {
       emit(FactLoadingState());
-
-      var fact = await repository.getFact();
-      if (fact.fact.isEmpty) {
-        emit(FactNoDataState('Fact not found'));
-      } else {
-        emit(FactLoadedState(model: fact));
+      try {
+        var fact = await repository.getFact();
+        if (fact.fact.isEmpty) {
+          emit(FactNoDataState('Fact not found'));
+        } else {
+          emit(FactLoadedState(model: fact));
+        }
+      } catch (_) {
+        emit(FactErrorState(errorMessage: 'Something went wrong'));
       }
-
-      emit(FactErrorState(errorMessage: 'Something went wrong'));
     });
   }
 }

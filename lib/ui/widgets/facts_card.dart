@@ -5,7 +5,6 @@ List<Widget> factsCard(String text, String value) {
     Text(
       text,
       style: TextStyle(fontSize: 13, color: Colors.black54),
-      overflow: TextOverflow.ellipsis,
     ),
     const SizedBox(height: 8),
     Text(
