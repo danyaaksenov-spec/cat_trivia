@@ -6,12 +6,11 @@ part 'cats.g.dart';
 @JsonSerializable()
 class CatModel extends Equatable {
   @override
-  List<Object?> get props => [id, url];
+  List<Object?> get props => [url];
 
-  int id;
   String url;
 
-  CatModel({required this.id, required this.url});
+  CatModel({required this.url});
 
   factory CatModel.fromJson(Map<String, dynamic> json) =>
       _$CatModelFromJson(json);

@@ -13,9 +13,8 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-final now = DateTime.now();
-
 class _HomePageState extends State<HomePage> {
+  final now = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FactBloc, FactState>(
@@ -95,16 +94,17 @@ class _HomePageState extends State<HomePage> {
                           borderRadius: BorderRadius.circular(14),
                           color: Colors.grey,
                           image: DecorationImage(
-                              image: NetworkImage(state.catModel.url),
+                              image: NetworkImage("https://cataas.com" +
+                                  "${state.catModel.url}"),
                               fit: BoxFit.cover),
                         ),
                       );
                     }
-                    // if (state is CatErrorState) {
-                    //   return const Center(
-                    //     child: Text('Error during getting cat photo'),
-                    //   );
-                    // }
+                    if (state is CatErrorState) {
+                      return const Center(
+                        child: Text('Error during getting cat photo'),
+                      );
+                    }
                     return const SizedBox.shrink();
                   },
                 ),
