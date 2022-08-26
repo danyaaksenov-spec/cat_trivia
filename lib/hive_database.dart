@@ -12,7 +12,7 @@ class HiveDataBase {
   }
 
   Future<FactHiveModel> getLastFactsFromLocal() async {
-    return _box.values.toList().cast<FactHiveModel>().first;
+    return _box.values.toList().cast<FactHiveModel>().last;
   }
 
   Future<List<FactHiveModel>> getAllFactsFromLocal() async {
