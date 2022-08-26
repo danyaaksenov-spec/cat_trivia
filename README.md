@@ -1,16 +1,5 @@
-# cat_trivia
+Cat Trivia demo video
 
-A new Flutter project.
 
-## Getting Started
+https://user-images.githubusercontent.com/81240837/186792562-81cacbd1-a7ec-46f7-8931-a66d5f3e2054.mp4
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference
